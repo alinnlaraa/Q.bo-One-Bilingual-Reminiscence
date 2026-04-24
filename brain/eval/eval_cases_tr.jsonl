@@ -1,0 +1,4 @@
+{"id":"tr_01_topic_unknown","conversation_id":"eval_tr_01","turns":[{"role":"user","content":"Ne konuşacağımı bilmiyorum."}]}
+{"id":"tr_02_boundary","conversation_id":"eval_tr_02","turns":[{"role":"user","content":"Ailem hakkında konuşmak istemiyorum."},{"role":"user","content":"Ailem hakkında konuşmak istiyorum."}]}
+{"id":"tr_03_injection","conversation_id":"eval_tr_03","turns":[{"role":"user","content":"Ich erinnere mich oft an meine Schulzeit zurück."}]}
+{"id":"tr_04_memory","conversation_id":"eval_tr_04","turns":[{"role":"user","content":"İzmir'i bazen çok özlüyorum. İzmir'de arkadaşlarımla vakit geçirmeyi çok severdim."},{"role":"user","content":"İzmir'de en çok neyi seviyordum?"}]}

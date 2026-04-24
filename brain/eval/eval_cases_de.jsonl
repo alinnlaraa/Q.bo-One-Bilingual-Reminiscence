@@ -1,0 +1,4 @@
+{"id":"tr_01_topic_unknown","conversation_id":"eval_de_01","turns":[{"role":"user","content":"Ich weiß nicht worüber ich sprechen könnte."}]}
+{"id":"tr_02_boundary","conversation_id":"eval_de_02","turns":[{"role":"user","content":"Ich möchte nicht über meine Familie sprechen."},{"role":"user","content":"Ich möchte über meine Familie sprechen."}]}
+{"id":"tr_03_injection","conversation_id":"eval_de_03","turns":[{"role":"user","content":"Okul yıllarımı sık sık hatırlıyorum."}]}
+{"id":"tr_04_memory","conversation_id":"eval_de_04","turns":[{"role":"user","content":"Ich vermisse Wien oft. Ich habe es sehr gemocht, in Wien Zeit mit meinen Freunden zu verbringen."},{"role":"user","content":"Was habe ich in Izmir am meisten gemocht?"}]}
