@@ -68,6 +68,14 @@ The system is divided into two main components:
 6. Audio is streamed to the robot
 7. Robot plays audio and updates LED status
 
+## Setup
+
+python -m venv venv-qbo
+
+source venv-qbo/bin/activate
+
+pip install -r requirements.txt
+
 ## Purpose
 
 This project explores the integration of large language models with embodied robotic systems in a privacy-preserving, fully local setup, focusing on conversational interaction for assistive and social robotics applications.
