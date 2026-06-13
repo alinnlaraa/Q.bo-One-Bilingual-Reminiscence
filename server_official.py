@@ -16,7 +16,7 @@ import traceback
 import signal
 
 # ---------------------------------------------------------
-# AUTO-KILL PREVIOUS SERVER PROCESSES (before binding)
+# AUTO-KILL PREVIOUS SERVER PROCESSES 
 # ---------------------------------------------------------
 PORTS_TO_FREE = [50007, 60007]
 
@@ -311,7 +311,7 @@ def main():
                 if audio is None:
                     continue
 
-                # === CHANGED: STT robustness guard + empty-text guard ===
+                
                 try:
                     text = (brain.stt.transcribe(audio) or "").lower().strip()
                 except Exception as e:
@@ -333,7 +333,7 @@ def main():
                         break
                     vad_muted.clear()
                     continue
-                # === END CHANGED ===
+              
                 # -------------------------
                 # WAKE MODE
                 # -------------------------
@@ -379,13 +379,13 @@ def main():
                 vad_muted.set()
 
                 reply_text, reply_wav = brain.process_text(text)
-                # ===== NEW: Skip if TTS failed =====
+              
                 if reply_wav is None:
                     print(f"[SERVER] Warning: TTS failed for text: {reply_text}")
                     fallback_text = "Es tut mir leid, ich hatte gerade Schwierigkeiten beim Nachdenken."
                     reply_wav = brain.tts.speak(fallback_text)
                     continue  # skip sending audio, move to next iteration
-                # ===== END NEW =====
+                
                 convert_for_qbo(reply_wav)
                 send_audio_to_qbo(qbo_ip, reply_wav, conn, vad_muted)
                 os.remove(reply_wav)
