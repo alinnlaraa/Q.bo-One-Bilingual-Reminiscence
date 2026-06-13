@@ -199,7 +199,7 @@ def airhug_vad_loop(audio_queue, stop_event, vad_muted):
                 continue
             rms = np.sqrt(np.mean(chunk ** 2))
 
-            # Debug: see the energy pattern
+           
             print("[VAD] RMS={:.4f} spoken={} silence_time={:.2f}".format(rms, spoken_flag, silence_time))
 
             if rms >= SILENCE_THRESHOLD:
@@ -216,7 +216,7 @@ def airhug_vad_loop(audio_queue, stop_event, vad_muted):
             if spoken_flag:
                 recording.append(chunk)
 
-            # End of utterance?
+        
             if spoken_flag and silence_time >= SILENCE_DURATION:
                 if recording:
                     audio = np.concatenate(recording)
@@ -263,7 +263,6 @@ def main():
         s.listen(1)
         print(f"[SERVER] Listening for QBO client on {HOST}:{PORT}...")
 #--------------------- TESTS ----------------------
-        # Add this to mark server fully ready
         ready_file = "/tmp/qbo_server_ready"
         if os.path.exists(ready_file):
             os.remove(ready_file)
