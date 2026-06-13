@@ -20,7 +20,7 @@ def init_db():
     try:
         c = conn.cursor()
 
-        # Better concurrency characteristics for multi-threaded logging
+    
         c.execute("PRAGMA journal_mode=WAL;")
         c.execute("PRAGMA synchronous=NORMAL;")
 
@@ -46,7 +46,7 @@ def init_db():
         """
         )
 
-        # Indices for faster lookups over time
+   
         c.execute(
             "CREATE INDEX IF NOT EXISTS idx_messages_conv_ts ON messages(conversation_id, timestamp)"
         )
@@ -94,7 +94,7 @@ def _dict_messages_to_lc(messages):
 
 
 # -----------------------------
-# Async summary helper (gated + debounced)
+# Async summary helper 
 # -----------------------------
 def maybe_trigger_async_summary(
     state: State,
@@ -103,10 +103,7 @@ def maybe_trigger_async_summary(
     min_turns: int = 6,
     min_interval_sec: int = 30,
 ):
-    """
-    Start at most one background summary thread.
-    Debounce by turns and time to reduce GPU contention/latency.
-    """
+ 
     lock = state.get("_lock")
     if lock is None:
         # Fallback (should be set by controller)
@@ -209,14 +206,14 @@ def call_model(state: State, language="Türkçe", name="Dilek"):
         state["messages"].append({"role": "assistant", "content": clean_content})
         state["_turns_since_summary"] = int(state.get("_turns_since_summary", 0)) + 1
 
-    # Start (debounced) background async summary
+    # Start  background async summary
     maybe_trigger_async_summary(state, datetime.now().strftime("%Y-%m-%d"))
 
     return {"messages": state["messages"]}
 
 
 # -----------------------------
-# Synchronous summarization (end-of-session)
+# Synchronous summarization
 # -----------------------------
 def summarize_conversation(state: State):
     lock = state.get("_lock")
@@ -258,7 +255,7 @@ def summarize_conversation(state: State):
         "  * tercih edilen veya kaçınılan konular\n"
             )
 
-    # Convert dict messages to LC messages BEFORE invoking
+    # Convert dict messages to LC messages
     messages_to_summarize = _dict_messages_to_lc(messages) + [
         HumanMessage(content=summary_prompt)
     ]
