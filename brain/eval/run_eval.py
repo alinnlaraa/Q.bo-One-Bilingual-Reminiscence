@@ -37,13 +37,11 @@ MODELS = [
 TEMPERATURE = 0.4
 TOP_P = 0.9
 
-# Keep test conversations short so async summary doesn't trigger (min_turns=6 in your code).
+
 MAX_ASSISTANT_TURNS_PER_CASE = 5
 
 
-# -----------------------------
-# Raw capture wrapper (no changes to your pipeline)
-# -----------------------------
+
 @dataclass
 class CapturedLLM:
     inner: Any
@@ -55,9 +53,7 @@ class CapturedLLM:
         return resp
 
 
-# -----------------------------
-# Simple metrics (thesis-friendly, low complexity)
-# -----------------------------
+
 def count_sentences(text: str) -> int:
     import re
     parts = re.split(r"[.!?]+", (text or "").strip())
@@ -76,11 +72,7 @@ def two_sentence_score(text: str) -> int:
     return 0
 
 def language_leakage_flag(raw_text: str) -> int:
-    """
-    Rough flag: did the RAW output contain non-Turkish-ish Latin patterns or non-Latin?
-    Your pipeline cleans the output, so this uses raw output to detect leaks.
-    0 = no obvious leak, 1 = possible leak.
-    """
+    
     import re
     t = (raw_text or "").strip()
     if not t:
@@ -97,7 +89,7 @@ def language_leakage_flag(raw_text: str) -> int:
 
 
 # -----------------------------
-# DB setup (reuse your DB path, keep your tables, add eval tables)
+# DB setup 
 # -----------------------------
 def init_eval_table():
     conn = sqlite3.connect(EVAL_DB_PATH)
@@ -160,9 +152,6 @@ def load_cases() -> List[Dict[str, Any]]:
     return cases
 
 
-# -----------------------------
-# Percentile helper
-# -----------------------------
 def percentile(values: List[float], p: float) -> float:
     if not values:
         return 0.0
@@ -200,7 +189,7 @@ def export_summary_csv() -> None:
     """)
     rows = c.fetchall()
 
-    # p95 latency per model (computed in python from DB)
+    # p95 latency per model 
     c.execute("SELECT DISTINCT model FROM eval_runs")
     models = [r[0] for r in c.fetchall()]
     p95_map: Dict[str, float] = {}
