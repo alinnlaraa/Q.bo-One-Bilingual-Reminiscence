@@ -42,7 +42,7 @@ kill $BOOT_BLINK_PID 2>/dev/null || true
 sleep 0.5
 
 
-# 1️⃣ Start audio receiver on QBO (Python 3)
+# Start audio receiver on QBO (Python 3)
 echo "[QBO] Starting qbo_audio_receiver.py..."
 python3 /opt/qbo/qbo_audio_receiver.py &
 RECEIVER_PID=$!
@@ -54,7 +54,7 @@ echo "[QBO] Killing leftover server processes on mini PC..."
 ssh ossi@Linux-PC.local "pkill -f server_official.py" || true
 sleep 1
 
-# 2️⃣ Start server on mini PC via SSH in the virtualenv
+# Start server on mini PC via SSH in the virtualenv
 echo "[QBO] Starting server_official.py on mini PC..."
 ssh -vvv -o BatchMode=yes -o ConnectTimeout=5 -o PasswordAuthentication=no ossi@Linux-PC.local \
 "source /home/ossi/vector_ai/venv-vector/bin/activate && nohup python /home/ossi/vector_ai/server_official.py > /home/ossi/vector_ai/server_official.log 2>&1 & echo LAUNCHED"&
