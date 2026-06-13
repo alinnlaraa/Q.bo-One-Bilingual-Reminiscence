@@ -54,7 +54,7 @@ class BrainController:
             print("[DEBUG] Empty transcription, ignored.")
             return None, None
 
-        # Remove last assistant reply from user transcription (safer than global replace)
+        # Remove last assistant reply from user transcription
         with self.state["_lock"]:
             last_assistant = (
                 self.state["messages"][-1]["content"] if self.state["messages"] else ""
@@ -73,7 +73,7 @@ class BrainController:
             print("[DEBUG] Empty transcription after cleanup, ignored.")
             return None, None
 
-        # Stop-words (word-boundary safe)
+        # Stop-words
         stop_pattern = re.compile(r"\b(dur|gülegüle|güle\s+güle)\b", re.IGNORECASE)
         if stop_pattern.search(text):
             # End-of-session synchronous summary
@@ -95,7 +95,7 @@ class BrainController:
         except Exception as e:
             print("[ERROR] Failed to store user message:", e)
 
-        # LLM response (reply now; summary is triggered in langgraph file)
+        # LLM response 
         try:
             reply_dict = call_model(self.state, language=self.language, name="User")
             reply_text = reply_dict["messages"][-1]["content"]
@@ -110,8 +110,7 @@ class BrainController:
 
         print("[LLM]", reply_text)
 
-        # Optional: extra periodic async summary trigger (gated + debounced)
-        # Keeps the same overall behavior, but prevents duplicate/racing summaries.
+      
         try:
             maybe_trigger_async_summary(self.state, self.day)
         except Exception as e:
