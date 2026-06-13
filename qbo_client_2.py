@@ -16,7 +16,7 @@ SERVER_IP = "Linux-PC.local"  # Mini PC IP
 PORT = 50007
 
 # -------------------------------------------------
-# SERIAL CONFIG (same as your test script)
+# SERIAL CONFIG
 # -------------------------------------------------
 SERIAL_PORT = "/dev/serial0"
 BAUDRATE = 115200
