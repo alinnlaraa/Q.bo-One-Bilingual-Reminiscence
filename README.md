@@ -3,6 +3,9 @@
 This project was build as part of a Master Thesis at the Technical University of Vienna.
 This repository contains the implementation of an embodied conversational AI system using the Q.bo One robot. The system integrates a local large language model (LLM), speech-to-text (STT), and text-to-speech (TTS) components in a distributed architecture consisting of a robot and an external workstation.
 
+Here you can find the respective Master Thesis with all details including the user study: https://doi.org/10.34726/hss.2026.135814
+Here you can find the relevant paper published on ACM: https://doi.org/10.1145/3821402.3830142
+
 ## Overview
 
 The system enables natural spoken interaction with a Q.bo One robot by combining:
